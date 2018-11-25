@@ -1,20 +1,29 @@
-import React, { Component } from "react";
+import * as React from "react";
 import EeContext from "./context";
 
-class Inline extends Component {
+interface IProps {
+  toggleIsFullscreen: () => void;
+}
+
+interface IState {
+  fullscreenMounted: boolean;
+  currentIndex: number;
+}
+
+class Inline extends React.Component<IProps, IState> {
   state = {
     fullscreenMounted: false,
     currentIndex: 0
   };
-  _fullscreenMountedListener = fullscreenMounted => {
+  _fullscreenMountedListener = (fullscreenMounted: boolean) => {
     if (fullscreenMounted) {
-      this.context.emit("initialIndex", this.state.currentIndex)
+      this.context.emit("initialIndex", this.state.currentIndex);
     }
     this.setState({
       fullscreenMounted
     });
   };
-  _currentIndexListener = currentIndex => {
+  _currentIndexListener = (currentIndex: number) => {
     this.setState({
       currentIndex
     });

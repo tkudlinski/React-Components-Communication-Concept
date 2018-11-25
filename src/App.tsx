@@ -1,13 +1,20 @@
-import React, { Component } from "react";
+import * as React from "react";
 import "./App.css";
 
 import Inline from "./Inline";
 import Fullscreen from "./Fullscreen";
 
-class App extends Component {
-  state = {
-    isFullscreen: false
-  };
+interface IState {
+  isFullscreen: boolean;
+}
+
+class App extends React.Component<object, IState> {
+  constructor(props: object) {
+    super(props);
+    this.state = {
+      isFullscreen: false
+    };
+  }
   _toggleIsFullscreen = () => {
     this.setState(prevState => ({
       isFullscreen: !prevState.isFullscreen
@@ -16,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className="App-header">
+        <header className="App-content">
           <Inline toggleIsFullscreen={this._toggleIsFullscreen} />
           {this.state.isFullscreen ? (
             <Fullscreen toggleIsFullscreen={this._toggleIsFullscreen} />
